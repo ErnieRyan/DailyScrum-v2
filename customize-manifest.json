@@ -1,0 +1,23 @@
+{
+  "app": "4450",
+
+  "scope": "ALL",
+
+  "desktop": {
+    "js": [
+      "https://js.cybozu.com/jquery/3.5.1/jquery.min.js",
+      "https://js.cybozu.com/luxon/3.4.3/luxon.min.js",
+      "BP稼働報告出力.js",
+      "名前キー項目.js",
+      "index.js"
+    ],
+
+    "css": ""
+  },
+
+  "mobile": {
+    "js": [],
+
+    "css": []
+  }
+}
