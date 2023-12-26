@@ -1,17 +1,31 @@
 (function () {
   "use strict";
 
-  // Hide user select elements
-  function hideElement(...targetSelectors) {
-    targetSelectors.forEach((selector) => {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach((element) => {
-        if (element) {
-          element.style.display = "none";
-        }
-      });
-    });
+  function hideFields(fieldCodes) {
+    fieldCodes.forEach((fieldCode) =>
+      kintone.app.record.setFieldShown(fieldCode, false)
+    );
   }
+
+  // Example usage
+  const userSelection = [
+    "User_Selection",
+    "User_Selection_0",
+    "User_Selection_1",
+    "User_Selection_2",
+  ];
+
+  // Hide user select elements
+  // function hideElement(...targetSelectors) {
+  //   targetSelectors.forEach((selector) => {
+  //     const elements = document.querySelectorAll(selector);
+  //     elements.forEach((element) => {
+  //       if (element) {
+  //         element.style.display = "none";
+  //       }
+  //     });
+  //   });
+  // }
 
   // Luxon for date format
   function getFormattedDate() {
@@ -33,10 +47,7 @@
     (event) => {
       const records = event.records;
       // Enter your code here
-      kintone.app.record.setFieldShown("User_Selection", false);
-      kintone.app.record.setFieldShown("User_Selection_0", false);
-      kintone.app.record.setFieldShown("User_Selection_1", false);
-      kintone.app.record.setFieldShown("User_Selection_2", false);
+      hideFields(userSelection);
 
       // hideElement(
       //   ".subtable-label-gaia.subtable-label-user_select-gaia.label-8237407",
@@ -108,11 +119,8 @@
       const record = event.record;
 
       // Enter your code here
-
-      kintone.app.record.setFieldShown("User_Selection", false);
-      kintone.app.record.setFieldShown("User_Selection_0", false);
-      kintone.app.record.setFieldShown("User_Selection_1", false);
-      kintone.app.record.setFieldShown("User_Selection_2", false);
+      
+      hideFields(userSelection);
 
       return event;
     }
