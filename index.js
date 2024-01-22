@@ -83,15 +83,11 @@
         if (resp && resp.records && resp.records.length > 0) {
           // Check if the 'records' array is not empty before accessing the first element
           var firstObject = resp.records[0];
-          var dateOfLastRecord = firstObject.日付.value;
           console.log("Last record of the user", firstObject);
 
           var record = kintone.app.record.get();
           console.log("Current record detail page", record);
 
-          // Set the defaultDate of 前日 and 前日_0 to be the same as dateOfLastRecord
-          record.record.前日.value = dateOfLastRecord;
-          record.record.前日_0.value = dateOfLastRecord;
           record.record.日付.value = getFormattedDate();
           kintone.app.record.set(record);
         } else {
@@ -119,10 +115,16 @@
       const record = event.record;
 
       // Enter your code here
-      
+
       hideFields(userSelection);
 
       return event;
     }
   );
+
+  kintone.events.on("app.report.show", (event) => {
+    // Enter your code here
+
+    return event;
+  });
 })();
