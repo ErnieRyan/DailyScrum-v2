@@ -10,7 +10,7 @@
   let oneTimeFlg = true;
   let chart1, chart2, chart3;
 
-  Chart.register(ChartDataLabels);
+  // Chart.register(ChartDataLabels);
 
   // luxonで使用する日付フォーマット
   const dateFormat = "yyyy-MM-dd";
@@ -250,9 +250,9 @@
     }
     chart1 = new Chart(ctx, {
       type: "bar",
-      data: {
+      datas: {
         labels: nMonthsBefore,
-        datesets: [
+        datasets: [
           {
             label: "前年同月売上",
             data: eventuallyLastYearData,
@@ -275,27 +275,26 @@
       },
       options: {
         scales: {
-          // xAxes: [
-          //   {
-          //     type: "linear",
-          //     stacked: true,
-          //   },
-          // ],
-          // yAxes: [
-          //   {
-          //     display: true,
-          //     scaleLabel: {
-          //       display: true,
-          //       labelString: "売上",
-          //       fontFamily: "monospace",
-          //     },
-          //     ticks: {
-          //       beginAtZero: true,
-          //       maxTicksLimit: 8,
-          //       callback: (value) => value + "万円",
-          //     },
-          //   },
-          // ],
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "売上",
+                fontFamily: "monospace",
+              },
+              ticks: {
+                beginAtZero: true,
+                maxTicksLimit: 8,
+                callback: (value) => value + "万円",
+              },
+            },
+          ],
         },
         tooltips: {
           enabled: true,
@@ -325,147 +324,147 @@
       },
     });
 
-    // // 売上と試用申込数グラフを描画（2つ目のグラフ）
-    // const ctx2 = document.getElementById("canvas2");
-    // if (chart2) {
-    //   chart2.destroy();
-    // }
-    // chart2 = new Chart(ctx2, {
-    //   type: "bar",
-    //   data: {
-    //     labels: nMonthsBefore,
-    //     datasets: [
-    //       {
-    //         yAxisID: "y-axis-1",
-    //         type: "line",
-    //         label: "試用申込数",
-    //         data: eventuallyTrialData,
-    //         backgroundColor: "rgba(54, 162, 235, 0.2)",
-    //         borderColor: "rgba(54, 162, 235, 1)",
-    //         borderWidth: 1,
-    //       },
-    //       {
-    //         yAxisID: "y-axis-0",
-    //         type: "bar",
-    //         label:
-    //           minDateTime.toFormat("yyyy年M月～") +
-    //           maxDateTime.toFormat("yyyy年M月売上"),
-    //         data: eventuallyThisYearData,
-    //         backgroundColor: "rgba(255, 99, 132, 0.2)",
-    //         borderColor: "rgba(255,99,132,1)",
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   },
-    //   options: {
-    //     scales: {
-    //       xAxes: [
-    //         {
-    //           stacked: true,
-    //         },
-    //       ],
-    //       yAxes: [
-    //         {
-    //           stacked: true,
-    //           position: "left",
-    //           id: "y-axis-0",
-    //           display: true,
-    //           scaleLabel: {
-    //             display: true,
-    //             labelString: "売上",
-    //             fontFamily: "monospace",
-    //           },
-    //           ticks: {
-    //             beginAtZero: true,
-    //             maxTicksLimit: 8,
-    //             callback: (value) => value + "万円",
-    //           },
-    //         },
-    //         {
-    //           position: "right",
-    //           id: "y-axis-1",
-    //           display: true,
-    //           scaleLabel: {
-    //             display: true,
-    //             labelString: "試用申込数",
-    //             fontFamily: "monospace",
-    //           },
-    //           ticks: {
-    //             beginAtZero: true,
-    //             maxTicksLimit: 6,
-    //           },
-    //         },
-    //       ],
-    //     },
-    //     tooltips: {
-    //       enabled: true,
-    //       mode: "single",
-    //       callbacks: {
-    //         title: (tooltipItems, data4) => {
-    //           const tmp = tooltipItems[0].xLabel.split("月");
-    //           // tooltipItems[0].xLabelの月がmaxDateTimeより大きかったら-1年する
-    //           // eslint-disable-next-line max-len
-    //           const retYear =
-    //             Number(tmp[0]) > Number(maxDateTime.toFormat(dateFormatM2))
-    //               ? maxDateTime.minus({ years: 1 }).toFormat(dateFormatY)
-    //               : maxDateTime.toFormat(dateFormatY);
-    //           return `${retYear}年${tooltipItems[0].xLabel}`;
-    //         },
-    //         label: (tooltipItems, data5) => {
-    //           if (tooltipItems.datasetIndex === 0) {
-    //             return `試用申込数：${tooltipItems.yLabel}`;
-    //           }
-    //           return `売上：${tooltipItems.yLabel}万円`;
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
+    // 売上と試用申込数グラフを描画（2つ目のグラフ）
+    const ctx2 = document.getElementById("canvas2");
+    if (chart2) {
+      chart2.destroy();
+    }
+    chart2 = new Chart(ctx2, {
+      type: "bar",
+      data: {
+        labels: nMonthsBefore,
+        datasets: [
+          {
+            yAxisID: "y-axis-1",
+            type: "line",
+            label: "試用申込数",
+            data: eventuallyTrialData,
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+          {
+            yAxisID: "y-axis-0",
+            type: "bar",
+            label:
+              minDateTime.toFormat("yyyy年M月～") +
+              maxDateTime.toFormat("yyyy年M月売上"),
+            data: eventuallyThisYearData,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255,99,132,1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
+          yAxes: [
+            {
+              stacked: true,
+              position: "left",
+              id: "y-axis-0",
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "売上",
+                fontFamily: "monospace",
+              },
+              ticks: {
+                beginAtZero: true,
+                maxTicksLimit: 8,
+                callback: (value) => value + "万円",
+              },
+            },
+            {
+              position: "right",
+              id: "y-axis-1",
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "試用申込数",
+                fontFamily: "monospace",
+              },
+              ticks: {
+                beginAtZero: true,
+                maxTicksLimit: 6,
+              },
+            },
+          ],
+        },
+        tooltips: {
+          enabled: true,
+          mode: "single",
+          callbacks: {
+            title: (tooltipItems, data4) => {
+              const tmp = tooltipItems[0].xLabel.split("月");
+              // tooltipItems[0].xLabelの月がmaxDateTimeより大きかったら-1年する
+              // eslint-disable-next-line max-len
+              const retYear =
+                Number(tmp[0]) > Number(maxDateTime.toFormat(dateFormatM2))
+                  ? maxDateTime.minus({ years: 1 }).toFormat(dateFormatY)
+                  : maxDateTime.toFormat(dateFormatY);
+              return `${retYear}年${tooltipItems[0].xLabel}`;
+            },
+            label: (tooltipItems, data5) => {
+              if (tooltipItems.datasetIndex === 0) {
+                return `試用申込数：${tooltipItems.yLabel}`;
+              }
+              return `売上：${tooltipItems.yLabel}万円`;
+            },
+          },
+        },
+      },
+    });
 
-    // // ドーナツグラフを描画
-    // const ctx3 = document.getElementById("canvas3");
-    // if (chart3) {
-    //   chart3.destroy();
-    // }
-    // chart3 = new Chart(ctx3, {
-    //   type: "doughnut",
-    //   data: {
-    //     labels: prodLabels,
-    //     datasets: [
-    //       {
-    //         data: eventuallyByProductData,
-    //         backgroundColor: prodBGColor,
-    //         // borderColor: prodBDColor,
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   },
-    //   options: {
-    //     showAllTooltips: true,
-    //     animation: {
-    //       animateScale: true,
-    //     },
-    //     tooltips: {
-    //       callbacks: {
-    //         title: (tooltipItems, data6) => {
-    //           return data6.labels[tooltipItems[0].index];
-    //         },
-    //         label: (tooltipItems, data7) => {
-    //           const per = Math.round(
-    //             (data7.datasets[0].data[tooltipItems.index] /
-    //               sumOfeventuallyByProductData) *
-    //               100
-    //           );
-    //           return `${per}% ${
-    //             data7.datasets[0].data[tooltipItems.index]
-    //           }万円`;
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
-    // // グラフのデフォルトフォントサイズ設定
-    // Chart.defaults.global.defaultFontSize = 10;
+    // ドーナツグラフを描画
+    const ctx3 = document.getElementById("canvas3");
+    if (chart3) {
+      chart3.destroy();
+    }
+    chart3 = new Chart(ctx3, {
+      type: "doughnut",
+      data: {
+        labels: prodLabels,
+        datasets: [
+          {
+            data: eventuallyByProductData,
+            backgroundColor: prodBGColor,
+            // borderColor: prodBDColor,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        showAllTooltips: true,
+        animation: {
+          animateScale: true,
+        },
+        tooltips: {
+          callbacks: {
+            title: (tooltipItems, data6) => {
+              return data6.labels[tooltipItems[0].index];
+            },
+            label: (tooltipItems, data7) => {
+              const per = Math.round(
+                (data7.datasets[0].data[tooltipItems.index] /
+                  sumOfeventuallyByProductData) *
+                  100
+              );
+              return `${per}% ${
+                data7.datasets[0].data[tooltipItems.index]
+              }万円`;
+            },
+          },
+        },
+      },
+    });
+    // グラフのデフォルトフォントサイズ設定
+    Chart.defaults.global.defaultFontSize = 10;
 
     // datePickerの作成は画面読み込み時のみ
     if (oneTimeFlg) {
