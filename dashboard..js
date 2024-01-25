@@ -247,6 +247,7 @@
       chart1.destroy();
     }
     chart1 = new Chart(ctx, {
+      plugins: [ChartDataLabels],
       type: "bar",
       data: {
         labels: nMonthsBefore,
@@ -273,6 +274,11 @@
       },
       options: {
         scales: {
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
           yAxes: [
             {
               display: true,
@@ -323,6 +329,7 @@
       chart2.destroy();
     }
     chart2 = new Chart(ctx2, {
+      plugins: [ChartDataLabels],
       type: "bar",
       data: {
         labels: nMonthsBefore,
@@ -351,6 +358,11 @@
       },
       options: {
         scales: {
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
           yAxes: [
             {
               stacked: true,
